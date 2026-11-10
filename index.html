@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DON'T GET MAD - 10 Levels</title>
+<title>DON'T GET MAD - by Jomming</title>
 
 <style>
 * { box-sizing: border-box; }
@@ -209,8 +209,14 @@ function showLevel() {
     target.innerText = "CLICK ME!";
     target.style.background = "#ffcc00";
 
-    if (level === 2) {
-        position(target);
+    else if (level ===2) {
+        clicks++;    
+
+        if (clicks >=3) {
+            winLevel();
+        } else {
+            fail("HAHA! You almost got it!);
+                 position(target); }
     }
 
     else if (level === 3) {
