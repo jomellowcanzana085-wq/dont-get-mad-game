@@ -1,194 +1,116 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DON'T GET MAD! - Ragebait Game</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DON'T GET MAD! - By Jomming</title>
 <style>
-* {
-    box-sizing: border-box;
-}
-
+* { box-sizing: border-box; }
 body {
-    margin: 0;
-    background: #171717;
-    color: white;
-    font-family: Arial, sans-serif;
-    text-align: center;
+  margin: 0;
+  background: #171717;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
 }
-
-.container {
-    max-width: 650px;
-    margin: 30px auto;
-    padding: 20px;
-}
-
-h1 {
-    color: #ffcc00;
-    font-size: 36px;
-}
-
+.container { max-width: 680px; margin: 25px auto; padding: 15px; }
+h1 { color: #ffcc00; font-size: 36px; }
 .stats {
-    display: flex;
-    justify-content: space-around;
-    gap: 8px;
-    flex-wrap: wrap;
-    background: #292929;
-    padding: 15px;
-    border-radius: 12px;
-    font-weight: bold;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 10px;
+  background: #292929;
+  padding: 15px;
+  border-radius: 12px;
+  font-weight: bold;
 }
-
 .arena {
-    height: 370px;
-    margin-top: 20px;
-    background: #292929;
-    border: 3px solid #ffcc00;
-    border-radius: 15px;
-    position: relative;
-    overflow: hidden;
-    touch-action: manipulation;
+  height: 380px;
+  margin-top: 20px;
+  background: #292929;
+  border: 3px solid #ffcc00;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  touch-action: manipulation;
 }
-
-#message {
-    padding: 18px;
-    font-size: 19px;
-    font-weight: bold;
-}
-
+#message { padding: 18px 8px; font-size: 18px; font-weight: bold; }
 button {
-    border: none;
-    padding: 13px 20px;
-    border-radius: 10px;
-    font-weight: bold;
-    cursor: pointer;
-    touch-action: manipulation;
+  border: none;
+  padding: 13px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  touch-action: manipulation;
 }
-
 #target, #fake {
-    position: absolute;
-    background: #ffcc00;
-    color: black;
-    left: 50%;
-    top: 65%;
-    transform: translate(-50%, -50%);
-    white-space: nowrap;
+  position: absolute;
+  left: 50%;
+  top: 65%;
+  transform: translate(-50%, -50%);
+  background: #ffcc00;
+  color: black;
+  white-space: nowrap;
 }
-
-#fake {
-    background: #ff3333;
-    color: white;
-    display: none;
-}
-
+#fake { display: none; background: #ed3333; color: white; }
 #answer {
-    display: none;
-    position: absolute;
-    top: 65%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 190px;
-    padding: 13px;
-    border-radius: 8px;
-    border: 2px solid #ffcc00;
-    text-align: center;
-    font-size: 16px;
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 65%;
+  transform: translate(-50%, -50%);
+  width: 210px;
+  padding: 13px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 16px;
 }
-
-#timer {
-    color: #ff7777;
-    font-weight: bold;
-    font-size: 18px;
-    min-height: 22px;
-}
-
-#feedback {
-    color: #ffcc00;
-    min-height: 30px;
-    font-weight: bold;
-}
-
-.start {
-    background: #ffcc00;
-    color: black;
-    margin-top: 15px;
-    font-size: 16px;
-}
-
-button:disabled {
-    opacity: .5;
-    cursor: not-allowed;
-}
-
-.footer {
-    color: #888;
-    font-size: 12px;
-    margin-top: 20px;
-}
+#timer { color: #ff8888; font-weight: bold; min-height: 22px; }
+#feedback { color: #ffcc00; min-height: 30px; font-weight: bold; }
+.start { background: #ffcc00; color: black; margin-top: 15px; font-size: 16px; }
+.footer { color: #999; font-size: 12px; }
 </style>
 </head>
-
 <body>
-
 <div class="container">
-
 <h1>😈 DON'T GET MAD!</h1>
-<p>10 Levels of Pure Frustration 😂</p>
+<p>20 LEVELS OF PURE FRUSTRATION 😂</p>
 
 <div class="stats">
-    <div>⭐ Score: <span id="score">0</span></div>
-    <div>💢 Fails: <span id="fails">0</span></div>
-    <div>Level: <span id="level">1</span>/10</div>
+  <div>⭐ Score: <span id="score">0</span></div>
+  <div>💢 Fails: <span id="fails">0</span></div>
+  <div>Level: <span id="level">1</span>/20</div>
 </div>
 
 <p id="timer"></p>
 
 <div class="arena" id="arena">
-
-    <div id="message">PRESS START TO PLAY!</div>
-
-    <button id="target" type="button">CLICK ME!</button>
-
-    <button id="fake" type="button">CLICK ME!</button>
-
-    <input
-        id="answer"
-        type="text"
-        placeholder="Type BANANA"
-        autocomplete="off"
-    >
-
+  <div id="message">PRESS START TO PLAY!</div>
+  <button id="target">CLICK ME!</button>
+  <button id="fake">FAKE BUTTON!</button>
+  <input id="answer" type="text" placeholder="Type your answer" autocomplete="off">
 </div>
 
 <p id="feedback">Are you ready to lose your patience? 😂</p>
-
-<button class="start" id="start" type="button">
-START GAME
-</button>
-
-<p class="footer">
-WARNING: This game may destroy your patience! 😭
-</p>
-
+<button class="start" id="start">START GAME</button>
+<p class="footer">WARNING: Your patience will be tested! 😭</p>
 </div>
 
 <script>
+const $ = id => document.getElementById(id);
 
-const scoreDisplay = document.getElementById("score");
-const failsDisplay = document.getElementById("fails");
-const levelDisplay = document.getElementById("level");
-
-const arena = document.getElementById("arena");
-const target = document.getElementById("target");
-const fake = document.getElementById("fake");
-const answer = document.getElementById("answer");
-
-const message = document.getElementById("message");
-const feedback = document.getElementById("feedback");
-const timerDisplay = document.getElementById("timer");
-const startButton = document.getElementById("start");
+const scoreDisplay = $("score");
+const failsDisplay = $("fails");
+const levelDisplay = $("level");
+const arena = $("arena");
+const target = $("target");
+const fake = $("fake");
+const answer = $("answer");
+const message = $("message");
+const feedback = $("feedback");
+const timerDisplay = $("timer");
+const startButton = $("start");
 
 let score = 0;
 let fails = 0;
@@ -197,367 +119,467 @@ let clicks = 0;
 let active = false;
 let timeLeft = 0;
 let timer = null;
+let holdTimer = null;
+let waitingForGreen = false;
+let nowIsActive = false;
+let sequence = 0;
 
 const challenges = [
-    "LEVEL 1: CLICK THE BUTTON!",
-    "LEVEL 2: CATCH THE MOVING BUTTON!",
-    "LEVEL 3: DON'T CLICK THE RED BUTTON!",
-    "LEVEL 4: CLICK THE BUTTON 3 TIMES!",
-    "LEVEL 5: WAIT FOR 5 SECONDS!",
-    "LEVEL 6: TYPE THE WORD BANANA!",
-    "LEVEL 7: CLICK BEFORE TIME RUNS OUT!",
-    "LEVEL 8: CLICK THE BUTTON THAT SAYS WRONG!",
-    "LEVEL 9: CLICK THE BUTTON 5 TIMES!",
-    "LEVEL 10: FINAL BOSS! DON'T CLICK!"
+  "LEVEL 1: CLICK THE BUTTON!",
+  "LEVEL 2: CATCH THE MOVING BUTTON!",
+  "LEVEL 3: DON'T CLICK THE RED BUTTON!",
+  "LEVEL 4: CLICK 3 TIMES!",
+  "LEVEL 5: WAIT 5 SECONDS!",
+  "LEVEL 6: TYPE BANANA!",
+  "LEVEL 7: CLICK BEFORE TIME RUNS OUT!",
+  "LEVEL 8: CLICK THE BUTTON THAT SAYS WRONG!",
+  "LEVEL 9: CLICK 5 TIMES!",
+  "LEVEL 10: THE FINAL BOSS OF PART ONE!",
+  "LEVEL 11: CLICK THE TINY BUTTON!",
+  "LEVEL 12: CATCH ME 3 TIMES!",
+  "LEVEL 13: SOLVE THE MATH QUESTION!",
+  "LEVEL 14: WAIT FOR THE GREEN BUTTON!",
+  "LEVEL 15: CLICK ONLY WHEN IT SAYS NOW!",
+  "LEVEL 16: FOLLOW THE CLICK SEQUENCE!",
+  "LEVEL 17: AVOID THE FAKE BUTTON!",
+  "LEVEL 18: TYPE I AM NOT MAD!",
+  "LEVEL 19: HOLD THE BUTTON FOR 2 SECONDS!",
+  "LEVEL 20: FINAL BOSS! CLICK 10 TIMES!"
 ];
 
 function updateStats() {
-    scoreDisplay.textContent = score;
-    failsDisplay.textContent = fails;
-    levelDisplay.textContent = Math.min(level, 10);
+  scoreDisplay.textContent = score;
+  failsDisplay.textContent = fails;
+  levelDisplay.textContent = Math.min(level, 20);
 }
 
 function stopTimer() {
-    clearInterval(timer);
-    timer = null;
+  clearInterval(timer);
+  timer = null;
 }
 
 function position(button) {
-    const maxX = Math.max(5, arena.clientWidth - button.offsetWidth - 10);
-    const maxY = Math.max(85, arena.clientHeight - button.offsetHeight - 15);
-
-    const x = 5 + Math.random() * Math.max(0, maxX - 5);
-    const y = 75 + Math.random() * Math.max(0, maxY - 75);
-
-    button.style.left = x + "px";
-    button.style.top = y + "px";
-    button.style.transform = "none";
-}
-
-function resetArena() {
-    stopTimer();
-
-    target.style.display = "block";
-    target.disabled = false;
-
-    fake.style.display = "none";
-    answer.style.display = "none";
-
-    timerDisplay.textContent = "";
-
-    target.style.background = "#ffcc00";
-    target.style.color = "black";
-
-    target.textContent = "CLICK ME!";
-    fake.textContent = "CLICK ME!";
+  const maxX = Math.max(5, arena.clientWidth - button.offsetWidth - 10);
+  const maxY = Math.max(90, arena.clientHeight - button.offsetHeight - 10);
+  button.style.left = (5 + Math.random() * Math.max(0, maxX - 5)) + "px";
+  button.style.top = (85 + Math.random() * Math.max(0, maxY - 85)) + "px";
+  button.style.transform = "none";
 }
 
 function fail(text) {
-    fails++;
-    feedback.textContent = text;
-    updateStats();
+  fails++;
+  feedback.textContent = text;
+  updateStats();
+}
+
+function resetArena() {
+  stopTimer();
+  clearTimeout(holdTimer);
+  holdTimer = null;
+  waitingForGreen = false;
+  nowIsActive = false;
+
+  target.style.display = "block";
+  target.disabled = false;
+  target.style.background = "#ffcc00";
+  target.style.color = "black";
+  target.style.width = "auto";
+  target.style.fontSize = "14px";
+  target.style.transform = "none";
+
+  fake.style.display = "none";
+  answer.style.display = "none";
+  timerDisplay.textContent = "";
 }
 
 function winLevel() {
-    stopTimer();
+  stopTimer();
+  clearTimeout(holdTimer);
+  holdTimer = null;
+  score += 100;
+  level++;
+  clicks = 0;
+  updateStats();
 
-    score += 100;
-    level++;
-    clicks = 0;
-
-    updateStats();
-
-    if (level > 10) {
-        finishGame();
-        return;
-    }
-
+  if (level > 20) {
+    finishGame();
+  } else {
     showLevel();
+  }
 }
 
 function finishGame() {
-    active = false;
-    stopTimer();
-
-    target.style.display = "none";
-    fake.style.display = "none";
-    answer.style.display = "none";
-
-    message.textContent = "🏆 YOU BEAT ALL 10 LEVELS!";
-
-    feedback.textContent =
-        "FINAL SCORE: " + score +
-        " | TOTAL FAILS: " + fails +
-        " | YOU ARE A RAGEBAIT LEGEND!";
-
-    timerDisplay.textContent = "";
-
-    startButton.textContent = "PLAY AGAIN";
-}
-
-function showLevel() {
-    resetArena();
-
-    clicks = 0;
-
-    message.textContent = challenges[level - 1];
-
-    feedback.textContent = "Good luck! You'll need it. 😂";
-
-    if (level === 1) {
-        target.textContent = "CLICK ME!";
-        position(target);
-    }
-
-    else if (level === 2) {
-        target.textContent = "CATCH ME!";
-        position(target);
-    }
-
-    else if (level === 3) {
-        target.textContent = "SAFE BUTTON";
-        target.style.background = "#ffcc00";
-
-        fake.style.display = "block";
-        fake.textContent = "CLICK ME!";
-
-        position(target);
-        position(fake);
-    }
-
-    else if (level === 4) {
-        target.textContent = "0 / 3";
-        position(target);
-    }
-
-    else if (level === 5) {
-        target.textContent = "WAIT...";
-        target.disabled = true;
-
-        timeLeft = 5;
-        timerDisplay.textContent = "WAIT: 5 SECONDS";
-
-        timer = setInterval(() => {
-            timeLeft--;
-
-            timerDisplay.textContent =
-                "WAIT: " + timeLeft + " SECONDS";
-
-            if (timeLeft <= 0) {
-                stopTimer();
-
-                target.disabled = false;
-                target.textContent = "NOW CLICK ME!";
-                feedback.textContent = "FINALLY! NOW CLICK IT!";
-                position(target);
-            }
-        }, 1000);
-    }
-
-    else if (level === 6) {
-        target.style.display = "none";
-        answer.style.display = "block";
-        answer.value = "";
-        answer.focus();
-    }
-
-    else if (level === 7) {
-        target.textContent = "HURRY!";
-
-        timeLeft = 8;
-        timerDisplay.textContent = "TIME LEFT: 8";
-
-        position(target);
-
-        timer = setInterval(() => {
-            timeLeft--;
-
-            timerDisplay.textContent =
-                "TIME LEFT: " + timeLeft;
-
-            if (timeLeft <= 0) {
-                stopTimer();
-
-                if (active && level === 7) {
-                    fail("TIME'S UP! HAHAHA! 😂");
-                    startLevel7();
-                }
-            }
-        }, 1000);
-    }
-
-    else if (level === 8) {
-        target.textContent = "WRONG";
-        position(target);
-    }
-
-    else if (level === 9) {
-        target.textContent = "0 / 5";
-        position(target);
-    }
-
-    else if (level === 10) {
-        target.textContent = "DON'T CLICK!";
-        position(target);
-    }
+  active = false;
+  stopTimer();
+  target.style.display = "none";
+  fake.style.display = "none";
+  answer.style.display = "none";
+  message.textContent = "🏆 YOU BEAT ALL 20 LEVELS!";
+  feedback.textContent = "FINAL SCORE: " + score +
+    " | FAILS: " + fails + " | YOU ARE A LEGEND!";
+  timerDisplay.textContent = "";
+  startButton.textContent = "PLAY AGAIN";
 }
 
 function startLevel7() {
-    stopTimer();
+  stopTimer();
+  timeLeft = 8;
+  timerDisplay.textContent = "TIME LEFT: 8";
 
-    timeLeft = 8;
-    timerDisplay.textContent = "TIME LEFT: 8";
+  timer = setInterval(() => {
+    timeLeft--;
+    timerDisplay.textContent = "TIME LEFT: " + timeLeft;
+    if (timeLeft <= 0) {
+      stopTimer();
+      if (active && level === 7) {
+        fail("TIME'S UP! HAHAHA! 😂");
+        startLevel7();
+      }
+    }
+  }, 1000);
+}
 
-    position(target);
+function showLevel() {
+  resetArena();
+  clicks = 0;
+  sequence = 0;
+  message.textContent = challenges[level - 1];
+  feedback.textContent = "Good luck! You'll need it. 😈";
+  target.textContent = "CLICK ME!";
 
-    timer = setInterval(() => {
+  switch (level) {
+    case 1:
+      position(target);
+      break;
+
+    case 2:
+      target.textContent = "CATCH ME!";
+      position(target);
+      break;
+
+    case 3:
+      target.textContent = "SAFE BUTTON";
+      fake.style.display = "block";
+      fake.textContent = "CLICK ME!";
+      position(target);
+      position(fake);
+      break;
+
+    case 4:
+      target.textContent = "0 / 3";
+      position(target);
+      break;
+
+    case 5:
+      target.textContent = "WAIT...";
+      target.disabled = true;
+      timeLeft = 5;
+      timerDisplay.textContent = "WAIT: 5 SECONDS";
+      timer = setInterval(() => {
         timeLeft--;
-
-        timerDisplay.textContent =
-            "TIME LEFT: " + timeLeft;
-
+        timerDisplay.textContent = "WAIT: " + timeLeft + " SECONDS";
         if (timeLeft <= 0) {
-            stopTimer();
-
-            if (active && level === 7) {
-                fail("TIME'S UP! TRY AGAIN! 😂");
-                startLevel7();
-            }
+          stopTimer();
+          target.disabled = false;
+          target.textContent = "NOW CLICK ME!";
+          feedback.textContent = "FINALLY! CLICK IT!";
+          position(target);
         }
-    }, 1000);
+      }, 1000);
+      break;
+
+    case 6:
+      target.style.display = "none";
+      answer.style.display = "block";
+      answer.placeholder = "Type BANANA";
+      break;
+
+    case 7:
+      target.textContent = "HURRY!";
+      position(target);
+      startLevel7();
+      break;
+
+    case 8:
+      target.textContent = "WRONG";
+      position(target);
+      break;
+
+    case 9:
+      target.textContent = "0 / 5";
+      position(target);
+      break;
+
+    case 10:
+      target.textContent = "FINAL BOSS!";
+      position(target);
+      break;
+
+    case 11:
+      target.textContent = "TINY!";
+      target.style.fontSize = "7px";
+      target.style.padding = "4px";
+      position(target);
+      break;
+
+    case 12:
+      target.textContent = "CATCH ME!";
+      position(target);
+      break;
+
+    case 13:
+      target.style.display = "none";
+      answer.style.display = "block";
+      answer.placeholder = "What is 7 + 5?";
+      break;
+
+    case 14:
+      target.textContent = "WAIT...";
+      target.style.background = "#ffcc00";
+      target.disabled = true;
+      waitingForGreen = true;
+      timeLeft = 3;
+      timerDisplay.textContent = "WAIT FOR GREEN: 3";
+      timer = setInterval(() => {
+        timeLeft--;
+        timerDisplay.textContent = "WAIT FOR GREEN: " + timeLeft;
+        if (timeLeft <= 0) {
+          stopTimer();
+          waitingForGreen = false;
+          target.disabled = false;
+          target.style.background = "#20c55a";
+          target.textContent = "NOW CLICK!";
+          feedback.textContent = "QUICK! IT'S GREEN!";
+        }
+      }, 1000);
+      position(target);
+      break;
+
+    case 15:
+      target.textContent = "WAIT...";
+      target.disabled = false;
+      position(target);
+      timer = setInterval(() => {
+        nowIsActive = !nowIsActive;
+        target.textContent = nowIsActive ? "NOW!" : "WAIT...";
+        target.style.background = nowIsActive ? "#20c55a" : "#ffcc00";
+      }, 1200);
+      break;
+
+    case 16:
+      target.textContent = "CLICK 1";
+      position(target);
+      break;
+
+    case 17:
+      target.textContent = "REAL BUTTON";
+      fake.style.display = "block";
+      fake.textContent = "FAKE BUTTON";
+      position(target);
+      position(fake);
+      break;
+
+    case 18:
+      target.style.display = "none";
+      answer.style.display = "block";
+      answer.placeholder = "Type I AM NOT MAD";
+      break;
+
+    case 19:
+      target.textContent = "HOLD ME!";
+      position(target);
+      break;
+
+    case 20:
+      target.textContent = "0 / 10";
+      position(target);
+      break;
+  }
 }
 
 function startGame() {
-    stopTimer();
-
-    score = 0;
-    fails = 0;
-    level = 1;
-    clicks = 0;
-    active = true;
-
-    startButton.textContent = "RESTART GAME";
-
-    updateStats();
-    showLevel();
+  score = 0;
+  fails = 0;
+  level = 1;
+  clicks = 0;
+  active = true;
+  startButton.textContent = "RESTART GAME";
+  updateStats();
+  showLevel();
 }
 
 function play() {
-    if (!active || target.disabled) return;
+  if (!active || target.disabled) return;
 
-    if (level === 1) {
-        winLevel();
-    }
+  switch (level) {
+    case 1:
+      winLevel();
+      break;
 
-    else if (level === 2) {
-        clicks++;
+    case 2:
+      clicks++;
+      if (clicks >= 3) winLevel();
+      else {
+        fail("HAHA! YOU ALMOST GOT IT!");
+        position(target);
+      }
+      break;
 
-        if (clicks >= 3) {
-            winLevel();
-        } else {
-            fail("HAHA! YOU ALMOST GOT IT! 😂");
-            position(target);
-        }
-    }
+    case 3:
+      winLevel();
+      break;
 
-    else if (level === 3) {
-        winLevel();
-    }
+    case 4:
+      clicks++;
+      target.textContent = clicks + " / 3";
+      if (clicks >= 3) winLevel();
+      break;
 
-    else if (level === 4) {
-        clicks++;
+    case 5:
+      if (timeLeft <= 0) winLevel();
+      break;
 
-        target.textContent = clicks + " / 3";
+    case 7:
+      winLevel();
+      break;
 
-        if (clicks >= 3) {
-            winLevel();
-        } else {
-            feedback.textContent = "KEEP CLICKING!";
-        }
-    }
+    case 8:
+      winLevel();
+      break;
 
-    else if (level === 5) {
-        winLevel();
-    }
+    case 9:
+      clicks++;
+      target.textContent = clicks + " / 5";
+      if (clicks >= 5) winLevel();
+      else position(target);
+      break;
 
-    else if (level === 7) {
-        winLevel();
-    }
+    case 10:
+      clicks++;
+      target.textContent = clicks + " / 5";
+      if (clicks >= 5) winLevel();
+      else fail("THE FINAL BOSS IS LAUGHING! 😂");
+      break;
 
-    else if (level === 8) {
-        winLevel();
-    }
+    case 11:
+      winLevel();
+      break;
 
-    else if (level === 9) {
-        clicks++;
+    case 12:
+      clicks++;
+      if (clicks >= 3) winLevel();
+      else {
+        fail("TOO SLOW! CATCH IT AGAIN!");
+        position(target);
+      }
+      break;
 
-        target.textContent = clicks + " / 5";
+    case 13:
+      break;
 
-        if (clicks >= 5) {
-            winLevel();
-        } else {
-            feedback.textContent = "ALMOST THERE! 😂";
-            position(target);
-        }
-    }
+    case 14:
+      if (!waitingForGreen) winLevel();
+      break;
 
-    else if (level === 10) {
-        clicks++;
+    case 15:
+      if (nowIsActive) winLevel();
+      else fail("TOO EARLY! WAIT FOR NOW!");
+      break;
 
-        if (clicks >= 5) {
-            winLevel();
-        } else {
-            fail("I SAID DON'T CLICK! 😭");
-            position(target);
-        }
-    }
+    case 16:
+      sequence++;
+      if (sequence >= 4) winLevel();
+      else {
+        target.textContent = "CLICK " + (sequence + 1);
+        feedback.textContent = "GOOD! KEEP GOING!";
+      }
+      break;
+
+    case 17:
+      winLevel();
+      break;
+
+    case 18:
+      break;
+
+    case 19:
+      break;
+
+    case 20:
+      clicks++;
+      target.textContent = clicks + " / 10";
+      if (clicks >= 10) winLevel();
+      else fail("FINAL BOSS SAYS: KEEP GOING!");
+      break;
+  }
 }
 
 target.addEventListener("click", play);
 
 fake.addEventListener("click", () => {
-    if (!active || level !== 3) return;
-
-    fail("HAHAHA! YOU CLICKED THE RED BUTTON! 😈");
+  if (!active) return;
+  if (level === 3 || level === 17) {
+    fail("HAHAHA! THAT WAS THE FAKE BUTTON! 😈");
     position(fake);
+  }
 });
 
 answer.addEventListener("input", () => {
-    if (
-        active &&
-        level === 6 &&
-        answer.value.trim().toLowerCase() === "banana"
-    ) {
-        winLevel();
-    }
+  if (!active) return;
+  const value = answer.value.trim().toLowerCase();
+
+  if (level === 6 && value === "banana") {
+    winLevel();
+  }
+
+  if (level === 13 && value === "12") {
+    winLevel();
+  }
+
+  if (level === 18 && value === "i am not mad") {
+    winLevel();
+  }
 });
 
-arena.addEventListener("click", (event) => {
-    if (!active) return;
+arena.addEventListener("click", event => {
+  if (!active) return;
+  if (event.target === target || event.target === fake ||
+      event.target === answer) return;
 
-    if (
-        event.target === target ||
-        event.target === fake ||
-        event.target === answer
-    ) {
-        return;
-    }
-
-    if (level === 3) {
-        fail("WRONG! CLICK THE YELLOW BUTTON!");
-    }
-
-    else if (level === 10) {
-        fail("DON'T TOUCH THE BACKGROUND! 😂");
-    }
+  if (level === 3 || level === 17) {
+    fail("WRONG! FIND THE REAL BUTTON!");
+  }
 });
+
+target.addEventListener("pointerdown", () => {
+  if (!active || level !== 19) return;
+
+  feedback.textContent = "KEEP HOLDING...";
+  holdTimer = setTimeout(() => {
+    if (active && level === 19) {
+      holdTimer = null;
+      winLevel();
+    }
+  }, 2000);
+});
+
+function cancelHold() {
+  if (holdTimer) {
+    clearTimeout(holdTimer);
+    holdTimer = null;
+    if (active && level === 19) {
+      fail("YOU LET GO TOO SOON! 😂");
+    }
+  }
+}
+
+target.addEventListener("pointerup", cancelHold);
+target.addEventListener("pointerleave", cancelHold);
+target.addEventListener("pointercancel", cancelHold);
 
 startButton.addEventListener("click", startGame);
 
-// Start the game automatically.
 startGame();
-
 </script>
-
 </body>
 </html>
