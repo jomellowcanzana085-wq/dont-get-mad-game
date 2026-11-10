@@ -1,0 +1,406 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DON'T GET MAD - 10 Levels</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: #171717;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.container {
+    max-width: 650px;
+    margin: 25px auto;
+    padding: 20px;
+}
+
+h1 {
+    color: #ffcc00;
+    font-size: 36px;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    background: #292929;
+    padding: 15px;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+.arena {
+    height: 370px;
+    margin-top: 20px;
+    background: #292929;
+    border: 3px solid #ffcc00;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+#message {
+    padding: 18px;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+button {
+    border: none;
+    padding: 13px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#target, #fake {
+    position: absolute;
+    background: #ffcc00;
+    color: black;
+    transform: translate(-50%, -50%);
+}
+
+#fake {
+    background: #ff5252;
+    color: white;
+    display: none;
+}
+
+#inputAnswer {
+    display: none;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+#feedback {
+    color: #ffcc00;
+    min-height: 30px;
+    font-weight: bold;
+}
+
+.start {
+    background: #ffcc00;
+    color: black;
+    margin-top: 15px;
+}
+
+#timer {
+    color: #ff7777;
+    font-weight: bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>😈 DON'T GET MAD!</h1>
+<p>10 Levels of Pure Frustration 😂</p>
+
+<div class="stats">
+    <div>⭐ Score: <span id="score">0</span></div>
+    <div>💢 Fails: <span id="fails">0</span></div>
+    <div>Level: <span id="level">1</span>/10</div>
+</div>
+
+<p id="timer"></p>
+
+<div class="arena" id="arena">
+
+<div id="message">PRESS START TO PLAY!</div>
+
+<button id="target" onclick="play()">CLICK ME!</button>
+
+<button id="fake" onclick="fakeClick()">CLICK ME!</button>
+
+<input id="inputAnswer" placeholder="Answer">
+
+</div>
+
+<p id="feedback">Are you ready to lose your patience? 😂</p>
+
+<button class="start" onclick="startGame()">START / RESTART</button>
+
+</div>
+
+<script>
+
+let score = 0;
+let fails = 0;
+let level = 1;
+let clicks = 0;
+let active = false;
+let timer = null;
+let timeLeft = 0;
+
+const arena = document.getElementById("arena");
+const target = document.getElementById("target");
+const fake = document.getElementById("fake");
+const input = document.getElementById("inputAnswer");
+const message = document.getElementById("message");
+const feedback = document.getElementById("feedback");
+
+const challenges = [
+"LEVEL 1: CLICK THE BUTTON!",
+"LEVEL 2: CATCH THE MOVING BUTTON!",
+"LEVEL 3: DON'T CLICK THE RED BUTTON!",
+"LEVEL 4: CLICK THE BUTTON 3 TIMES!",
+"LEVEL 5: WAIT 5 SECONDS!",
+"LEVEL 6: TYPE THE WORD BANANA!",
+"LEVEL 7: CLICK THE BUTTON BEFORE TIME RUNS OUT!",
+"LEVEL 8: CLICK THE BUTTON THAT SAYS WRONG!",
+"LEVEL 9: CLICK THE BUTTON 5 TIMES!",
+"LEVEL 10: FINAL BOSS! CLICK THE BUTTON!"
+];
+
+function startGame() {
+    score = 0;
+    fails = 0;
+    level = 1;
+    clicks = 0;
+    active = true;
+
+    clearInterval(timer);
+    document.getElementById("timer").innerText = "";
+
+    updateStats();
+    showLevel();
+}
+
+function updateStats() {
+    document.getElementById("score").innerText = score;
+    document.getElementById("fails").innerText = fails;
+    document.getElementById("level").innerText = level;
+}
+
+function position(btn) {
+    let maxX = arena.clientWidth - btn.offsetWidth - 10;
+    let maxY = arena.clientHeight - btn.offsetHeight - 65;
+
+    btn.style.left = (10 + Math.random() * maxX) + "px";
+    btn.style.top = (75 + Math.random() * maxY) + "px";
+    btn.style.transform = "none";
+}
+
+function showLevel() {
+    clearInterval(timer);
+    target.style.display = "block";
+    fake.style.display = "none";
+    input.style.display = "none";
+
+    message.innerText = challenges[level - 1];
+    feedback.innerText = "Good luck! You'll need it.";
+
+    target.innerText = "CLICK ME!";
+    target.style.background = "#ffcc00";
+
+    if (level === 2) {
+        position(target);
+    }
+
+    else if (level === 3) {
+        target.innerText = "SAFE BUTTON";
+        fake.style.display = "block";
+        fake.innerText = "CLICK ME!";
+        position(target);
+        position(fake);
+    }
+
+    else if (level === 4 || level === 9) {
+        clicks = 0;
+        target.innerText = level === 4 ? "0 / 3" : "0 / 5";
+        position(target);
+    }
+
+    else if (level === 5) {
+        target.innerText = "WAIT...";
+        target.disabled = true;
+        timeLeft = 5;
+        document.getElementById("timer").innerText =
+            "WAIT " + timeLeft + " SECONDS";
+
+        timer = setInterval(() => {
+            timeLeft--;
+            document.getElementById("timer").innerText =
+                "WAIT " + timeLeft + " SECONDS";
+
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                target.disabled = false;
+                target.innerText = "NOW CLICK!";
+                feedback.innerText = "NOW! DON'T MISS!";
+                position(target);
+            }
+        }, 1000);
+    }
+
+    else if (level === 6) {
+        target.style.display = "none";
+        input.style.display = "block";
+        input.value = "";
+        input.focus();
+    }
+
+    else if (level === 7) {
+        timeLeft = 5;
+        target.innerText = "HURRY!";
+        position(target);
+
+        timer = setInterval(() => {
+            timeLeft--;
+            document.getElementById("timer").innerText =
+                "TIME LEFT: " + timeLeft;
+
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                if (active && level === 7) {
+                    fail("TIME'S UP! 😂 TRY AGAIN!");
+                    timeLeft = 5;
+                    showLevel();
+                }
+            }
+        }, 1000);
+    }
+
+    else if (level === 8) {
+        target.innerText = "WRONG";
+        position(target);
+    }
+
+    else if (level === 10) {
+        target.innerText = "DON'T CLICK!";
+        position(target);
+    }
+
+    else {
+        position(target);
+    }
+}
+
+function fail(text) {
+    fails++;
+    feedback.innerText = text;
+    updateStats();
+}
+
+function winLevel() {
+    clearInterval(timer);
+    score += 100;
+    level++;
+    clicks = 0;
+    updateStats();
+
+    if (level > 10) {
+        active = false;
+        target.style.display = "none";
+        fake.style.display = "none";
+        input.style.display = "none";
+
+        message.innerText = "🏆 YOU BEAT ALL 10 LEVELS!";
+        feedback.innerText =
+            "FINAL SCORE: " + score +
+            " | FAILS: " + fails +
+            " YOU ARE A RAGEBAIT LEGEND!";
+        document.getElementById("timer").innerText = "";
+        return;
+    }
+
+    showLevel();
+}
+
+function play() {
+    if (!active) return;
+
+    if (level === 1) {
+        winLevel();
+    }
+
+    else if (level === 2) {
+        fail("HAHA! YOU ALMOST GOT IT!");
+        position(target);
+    }
+
+    else if (level === 3) {
+        winLevel();
+    }
+
+    else if (level === 4 || level === 9) {
+        clicks++;
+        let needed = level === 4 ? 3 : 5;
+
+        target.innerText = clicks + " / " + needed;
+
+        if (clicks >= needed) {
+            winLevel();
+        } else {
+            position(target);
+        }
+    }
+
+    else if (level === 5) {
+        if (timeLeft > 0) {
+            fail("TOO EARLY! WAIT!");
+        } else {
+            winLevel();
+        }
+    }
+
+    else if (level === 7) {
+        winLevel();
+    }
+
+    else if (level === 8) {
+        winLevel();
+    }
+
+    else if (level === 10) {
+        fail("HAHA! I SAID DON'T CLICK! 😭");
+        target.innerText = "DON'T CLICK!";
+        position(target);
+    }
+}
+
+function fakeClick() {
+    if (active && level === 3) {
+        fail("YOU CLICKED THE RED BUTTON! 😂");
+        position(fake);
+    }
+}
+
+input.addEventListener("input", function() {
+    if (active && level === 6 &&
+        input.value.trim().toLowerCase() === "banana") {
+        winLevel();
+    }
+});
+
+arena.addEventListener("click", function(event) {
+    if (!active || event.target === target ||
+        event.target === fake || event.target === input) return;
+
+    if (level === 10) {
+        fail("WRONG! DON'T TOUCH THE BACKGROUND!");
+    }
+});
+
+startGame();
+
+</script>
+
+</body>
+</html>
